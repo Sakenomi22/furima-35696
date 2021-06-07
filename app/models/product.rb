@@ -20,6 +20,6 @@ class Product < ApplicationRecord
   belongs_to :judgement
   belongs_to :delivery_day
   belongs_to :area
-  belongs_to :user, optional: true
+  belongs_to :user
   has_one_attached :image
 end

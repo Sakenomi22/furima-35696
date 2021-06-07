@@ -11,7 +11,7 @@ RSpec.describe Product, type: :model do
         expect(@product).to be_valid
       end
       it 'priceが半角数字の300~9,999,999の間であれば投稿できる' do
-        @product.price = '300'
+        @product.price = 300
       end
     end
     context '出品できない時' do
@@ -66,12 +66,12 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Price には300~9,999,999の数字を入力してください")
       end
       it 'priceが300円未満だと出品できない' do
-        @product.price = '299'
+        @product.price = 299
         @product.valid?
         expect(@product.errors.full_messages).to include("Price には300~9,999,999の数字を入力してください")
       end
       it 'priceが10,000,000円以上だと出品できない' do
-        @product.price = '10000000'
+        @product.price = 10000000
         @product.valid?
         expect(@product.errors.full_messages).to include("Price には300~9,999,999の数字を入力してください")
       end
@@ -99,6 +99,11 @@ RSpec.describe Product, type: :model do
         @product.delivery_day_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Delivery day must be other than 1")
+      end
+      it 'userが存在しないと登録できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("User must exist")
       end
     end
   end
