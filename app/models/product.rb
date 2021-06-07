@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-    with_options presence: true do
+  with_options presence: true do
     validates :name
     validates :description
     validates :image
@@ -10,7 +10,7 @@ class Product < ApplicationRecord
       validates :area_id
       validates :delivery_day_id
     end
-    with_options inclusion: { in: 300..9999999, message: 'には300~9,999,999の数字を入力してください' },format: { with:/\A[0-9]+\z/}do
+    with_options inclusion: { in: 300..9_999_999, message: 'には300~9,999,999の数字を入力してください' }, format: { with: /\A[0-9]+\z/ } do
       validates :price
     end
   end
