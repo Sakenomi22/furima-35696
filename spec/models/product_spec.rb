@@ -65,8 +65,13 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Price には300~9,999,999の数字を入力してください")
       end
-      it 'priceが300~9,999,999の間でないと出品できない' do
-        @product.price = '200'
+      it 'priceが300円未満だと出品できない' do
+        @product.price = '299'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price には300~9,999,999の数字を入力してください")
+      end
+      it 'priceが10,000,000円以上だと出品できない' do
+        @product.price = '10000000'
         @product.valid?
         expect(@product.errors.full_messages).to include("Price には300~9,999,999の数字を入力してください")
       end
