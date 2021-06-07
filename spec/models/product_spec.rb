@@ -75,6 +75,31 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Price には300~9,999,999の数字を入力してください")
       end
+      it 'category_idが1だと登録できないこと' do
+        @product.category_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Category must be other than 1")
+      end
+      it 'status_idが1だと登録できないこと' do
+        @product.status_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Status must be other than 1")
+      end
+      it 'judgement_idが1だと登録できないこと' do
+        @product.judgement_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Judgement must be other than 1")
+      end
+      it 'area_idが1だと登録できないこと' do
+        @product.area_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Area must be other than 1")
+      end
+      it 'delivery_day_idが1だと登録できないこと' do
+        @product.delivery_day_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Delivery day must be other than 1")
+      end
     end
   end
 end
