@@ -11,10 +11,10 @@ class PurchaseDelivery
     with_options format: { with: /\A\d{3}-\d{4}\z/ } do
       validates :postal_code
     end
-    with_options format: { with: /\A\d{11}\z/ } do
+    with_options format: { with: /\A\d{10,11}\z/ } do
       validates :number
     end
-    validates :area_id, numericality: { other_than: 0 }
+    validates :area_id, numericality: { other_than: 1 }
   end
 
   def save
