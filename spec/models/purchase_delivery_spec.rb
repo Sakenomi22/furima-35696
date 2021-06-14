@@ -62,10 +62,15 @@ RSpec.describe PurchaseDelivery, type: :model do
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include('Postal code is invalid')
       end
-      it 'numberは11桁以内でないと出品できない' do
-        @purchase_delivery.number = '111111111'
+      it 'numberは12桁以上だと出品できない' do
+        @purchase_delivery.number = '111111111111'
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include('Number is invalid')
+      end
+      it 'numberは9桁以下だと登録できない' do
+        @purchase_delivery.number = '111111111'
+        @purchase_delivery.valid?
+        expect(@purchase_delivery.errors.full_messages).to include("Number is invalid")
       end
       it 'numberは数値じゃないと出品できない' do
         @purchase_delivery.number = 'あああ'
